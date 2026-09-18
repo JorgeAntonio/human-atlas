@@ -86,3 +86,69 @@ h1 .edition{font-family:inherit;font-weight:500;font-size:10px;letter-spacing:.0
 @media(max-width:767px){body:has(.detail-sheet) .view-controls{visibility:hidden}}
 
 @media(max-height:600px) and (orientation:landscape){body:has(.detail-sheet) .bottom-dock{left:12px;right:324px;width:auto;transform:none;max-width:none;margin:0}}
+
+
+/* FORMA exercise mode ----------------------------------------------------- */
+.forma-identity{max-width:min(560px,calc(100% - 150px))}
+.forma-identity h1{font-size:34px}
+.forma-modes{position:absolute;left:32px;top:128px;z-index:6;display:flex;gap:3px;padding:4px;border-radius:13px}
+.forma-modes button{min-height:40px;padding:0 17px;border-radius:9px;color:#697582;font-size:12px;font-weight:500}
+.forma-modes button.active{background:#263b48;color:#fff;box-shadow:0 2px 5px #18253616}
+.muscle-panel{position:absolute;left:30px;top:200px;bottom:175px;width:270px;max-height:610px;border-radius:16px;display:flex;flex-direction:column;padding:18px 14px 0;z-index:5}
+.muscle-list{display:flex;flex-direction:column;gap:3px;padding:13px 0;overflow-y:auto;min-height:0}
+.muscle-row{width:100%;display:grid;grid-template-columns:8px minmax(0,1fr) auto;align-items:center;gap:9px;min-height:42px;padding:7px 7px!important;text-align:left;border-radius:9px!important;color:#3f4d59!important}
+.muscle-row>span:nth-child(2){overflow:hidden;text-overflow:ellipsis}
+.muscle-row small{font-size:9px;color:#8a949e;font-weight:500}
+.muscle-role-dot{width:7px;height:7px;border-radius:50%;background:#9ba5ad}
+.role-primary .muscle-role-dot{background:#c95445}
+.role-secondary .muscle-role-dot{background:#d78b59}
+.role-stabilizer .muscle-role-dot{background:#9d8066}
+.muscle-row:disabled{opacity:.38}
+.mapping-warning{font-size:10px;line-height:1.5;color:#8c6b5e;margin:0 3px 10px}
+.forma-dock{align-items:center;min-height:102px}
+.motion-play{width:48px;height:48px;min-width:48px;border-radius:50%!important;border:1px solid #18253618!important;background:#f3f5f6!important;display:flex;align-items:center;justify-content:center}
+.motion-track{flex:1;min-width:0}
+.motion-track-head{display:flex;align-items:center;justify-content:space-between;gap:14px;font-size:11px;color:#586572;margin-bottom:9px}
+.motion-track-head strong{font-size:10px;font-weight:600;color:#9a7464;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+.motion-rail{height:4px;border-radius:999px;background:#dfe4e7;position:relative;overflow:hidden}
+.motion-rail i{display:block;width:0;height:100%;background:#263b48}
+.motion-note{font-size:10px;color:#87929d;line-height:1.45;margin-top:8px;max-width:680px}
+.forma-dock .dock-reset{min-width:58px}
+@media(max-width:1000px){
+ .forma-modes{left:22px}
+ .muscle-panel{left:20px;width:230px}
+}
+@media(max-width:767px){
+ .forma-identity{max-width:calc(100% - 105px)}
+ .forma-identity h1{font-size:23px;line-height:1.08;max-width:260px}
+ .forma-identity .identity-meta{max-width:245px;white-space:normal;line-height:1.45}
+ .forma-modes{left:12px;right:12px;top:max(106px,calc(env(safe-area-inset-top) + 88px));width:auto;justify-content:stretch}
+ .forma-modes button{flex:1;min-width:0;min-height:44px;padding:0 6px;font-size:11px}
+ .view-controls{top:max(161px,calc(env(safe-area-inset-top) + 143px))}
+ .muscle-panel{display:flex;left:12px;right:12px;top:auto;bottom:calc(151px + env(safe-area-inset-bottom));width:auto;max-height:34dvh;padding:12px 13px 0;background:#fffffff5}
+ .muscle-list{display:grid;grid-template-columns:1fr 1fr;gap:3px 7px}
+ .muscle-row{min-height:44px;grid-template-columns:8px minmax(0,1fr)}
+ .muscle-row small{display:none}
+ .mapping-warning{display:none}
+ .forma-dock{bottom:calc(30px + env(safe-area-inset-bottom));min-height:104px;padding:12px}
+ .motion-play{width:44px;height:44px;min-width:44px}
+ .motion-track-head span{font-size:10px}
+ .motion-track-head strong{font-size:9px}
+ .motion-note{font-size:9px;line-height:1.35}
+ .scene-caption{bottom:calc(157px + env(safe-area-inset-bottom))}
+}
+@media(max-width:380px){
+ .forma-modes button{font-size:10px}
+ .forma-identity h1{font-size:21px;max-width:220px}
+ .muscle-list{grid-template-columns:1fr}
+ .muscle-panel{max-height:31dvh}
+ .motion-note{display:none}
+ .forma-dock{min-height:82px}
+}
+@media(max-height:600px) and (orientation:landscape){
+ .forma-modes{top:16px;left:230px;right:auto}
+ .forma-identity{display:none}
+ .muscle-panel{top:72px;bottom:112px;left:12px;width:255px;max-height:none}
+ .forma-dock{bottom:12px;left:280px;right:12px;width:auto;max-width:none;transform:none;margin:0;min-height:86px}
+ .motion-note{display:none}
+}

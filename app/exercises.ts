@@ -81,18 +81,18 @@ const normalize = (value: string) =>
     .replace(/\s+/g, ' ')
     .trim();
 
-function findConcept(concepts: Concept[], wanted: string) {
+function findConcepts(concepts: Concept[], wanted: string) {
   const target = normalize(wanted);
 
-  const exact = concepts.find(concept => normalize(concept.name) === target);
-  if (exact) return exact;
+  const exact = concepts.filter(concept => normalize(concept.name) === target);
+  if (exact.length) return exact;
 
-  // BodyParts3D sometimes includes laterality or a more specific anatomical
-  // qualifier in the human-readable concept name. Prefer the shortest match so
-  // a generic exercise mapping remains stable when the atlas changes.
+  // BodyParts3D often stores laterality in separate concepts. Return every
+  // matching concept so a generic name such as "gluteus maximus" resolves to
+  // both left and right structures instead of arbitrarily choosing one side.
   return concepts
     .filter(concept => normalize(concept.name).includes(target))
-    .sort((a, b) => a.name.length - b.name.length)[0];
+    .sort((a, b) => a.name.length - b.name.length);
 }
 
 export interface ResolvedExerciseMuscle extends ExerciseMuscle {
@@ -110,14 +110,14 @@ export function resolveExerciseMuscles(
     const unresolved: string[] = [];
 
     for (const name of muscle.conceptNames) {
-      const concept = findConcept(atlas.concepts, name);
-      if (concept) concepts.push(concept);
+      const matches = findConcepts(atlas.concepts, name);
+      if (matches.length) concepts.push(...matches);
       else unresolved.push(name);
     }
 
     return {
       ...muscle,
-      concepts,
+      concepts: [...new Map(concepts.map(concept => [concept.id, concept])).values()],
       elementIds: [...new Set(concepts.flatMap(concept => concept.elements))],
       unresolved,
     };

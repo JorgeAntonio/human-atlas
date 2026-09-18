@@ -35,7 +35,7 @@ export default function Home(){
  const toggle=(id:SystemId)=>{setDetails(false);setState(s=>({...s,selected:[],isolate:false,visible:s.visible.includes(id)?s.visible.filter(x=>x!==id):[...s.visible,id]}));};
  const reset=()=>{setMotion(0);setState(s=>({...initial,visible:['integumentary','muscular','skeletal'],selected:mode==='muscles'?squatElements:[],rotate:false,reset:s.reset+1}));setChosen(null);setDetails(false);setPanel(null);};
  const openPanel=(next:'layers'|'search')=>{setDetails(false);setPanel(p=>p===next?null:next);};
- return <main className="studio">
+ return <main className="studio forma-studio">
   {atlas&&<AnatomyScene atlas={atlas} state={{...state,squatProgress:motion,inspectorOpen:details&&selectedParts.length>0}} onSelect={choosePart} onProgress={n=>{setProgress(n);if(n===100)setError('');}} onError={setError}/>}
   <div className="vignette"/>
   <header className="identity forma-identity"><div className="eyebrow"><span className="status-dot"/> FORMA · EXERCISE ATLAS</div><h1>Sentadilla con barra<Badge variant="outline" className="edition">BETA</Badge></h1><div className="identity-meta">Piernas <span>·</span> Compuesto <span>·</span> Barra <span>·</span> BodyParts3D</div></header>
